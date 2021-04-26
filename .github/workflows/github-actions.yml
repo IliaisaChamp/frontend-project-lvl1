@@ -12,8 +12,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: ESLint
+     - name: npm install
         run: |
-          make lint
+          make install
         env:
           CI: true
+      - name: Linter
+        run: |
+          make lint

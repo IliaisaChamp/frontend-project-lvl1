@@ -6,9 +6,9 @@ env:
   es2020: true
 
 extends:
-  - airbnb-base
-  - plugin:import/errors
-  - plugin:import/warnings
+  - 'airbnb-base'
+  - 'plugin:import/errors'
+  - 'plugin:import/warnings'
 
 parserOptions:
   ecmaVersion: 11
