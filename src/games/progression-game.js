@@ -9,7 +9,7 @@ const createGame = () => {
   const replacedNum = progressionArr[randomId];
 
   const questionArr = [...progressionArr];
-  questionArr.splice(randomId, 1, '...');
+  questionArr.splice(randomId, 1, '..');
 
   const question = questionArr.join(' ');
 
