@@ -1,12 +1,6 @@
 import readlineSync from 'readline-sync';
-import { randomInteger, lostGame } from '../lib/games-lib.js';
+import { randomInteger, lostGame, makeGreeting } from '../lib/games-lib.js';
 import { askQuestionGcd } from '../lib/gcd-game-lib.js';
-
-const makeGreeting = () => {
-  const name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}`);
-  return name;
-};
 
 const startGcdGame = () => {
   const name = makeGreeting();

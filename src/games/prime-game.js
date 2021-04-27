@@ -1,12 +1,8 @@
 import readlineSync from 'readline-sync';
-import { randomInteger, lostGame, askQuestion } from '../lib/games-lib.js';
+import {
+  randomInteger, lostGame, askQuestion, makeGreeting,
+} from '../lib/games-lib.js';
 import isPrime from '../lib/prime-game.lib.js';
-
-const makeGreeting = () => {
-  const name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}`);
-  return name;
-};
 
 const startPrimeGame = () => {
   const name = makeGreeting();

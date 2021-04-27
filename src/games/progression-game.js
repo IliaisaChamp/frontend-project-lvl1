@@ -1,12 +1,6 @@
 import readlineSync from 'readline-sync';
-import { lostGame } from '../lib/games-lib.js';
+import { lostGame, makeGreeting } from '../lib/games-lib.js';
 import { makeProgressionArray, replaceNumInArray, askQuestion } from '../lib/progression-game-lib.js';
-
-const makeGreeting = () => {
-  const name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}`);
-  return name;
-};
 
 const startProgressionGame = () => {
   const name = makeGreeting();

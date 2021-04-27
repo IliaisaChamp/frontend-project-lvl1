@@ -1,11 +1,7 @@
 import readlineSync from 'readline-sync';
-import { randomInteger, lostGame, askQuestion } from '../lib/games-lib.js';
-
-const makeGreeting = () => {
-  const name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}`);
-  return name;
-};
+import {
+  randomInteger, lostGame, askQuestion, makeGreeting,
+} from '../lib/games-lib.js';
 
 const startEvenGame = () => {
   const name = makeGreeting();
