@@ -1,26 +1,30 @@
-import readlineSync from 'readline-sync';
-import { randomInteger, lostGame, makeGreeting } from '../lib/games-lib.js';
-import { askQuestionGcd } from '../lib/gcd-game-lib.js';
+import startGames from '../index.js';
+import { randomInteger } from '../lib/games.js';
 
-const startGcdGame = () => {
-  const name = makeGreeting();
+const rules = 'Find the greatest common divisor of given numbers.';
 
-  console.log('Find the greatest common divisor of given numbers.');
-
-  for (let count = 0; count < 3; count += 1) {
-    const firstNum = randomInteger(1, 100);
-    const secondNum = randomInteger(1, 100);
-    const questionResult = askQuestionGcd(firstNum, secondNum);
-
-    const answer = readlineSync.question('Your answer: ');
-
-    if (Number(answer) === questionResult) {
-      console.log('Correct!');
+const gcd = (a, b) => {
+  let firstNum = a;
+  let secondNum = b;
+  while (firstNum !== secondNum) {
+    if (firstNum > secondNum) {
+      firstNum -= secondNum;
     } else {
-      return lostGame(answer, questionResult, name);
+      secondNum -= firstNum;
     }
   }
-  return console.log(`Congratulations, ${name}`);
+  return firstNum;
 };
 
-export { startGcdGame };
+const createGame = () => {
+  const firstNum = randomInteger(0, 100);
+  const secondNum = randomInteger(0, 100);
+  const question = `${firstNum} ${secondNum}`;
+
+  const correctAnswer = gcd(firstNum, secondNum);
+
+  return [question, correctAnswer];
+};
+
+const startGcdGame = () => startGames(createGame, rules);
+export default startGcdGame;

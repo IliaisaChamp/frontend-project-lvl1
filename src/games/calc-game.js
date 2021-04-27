@@ -1,27 +1,28 @@
-import readlineSync from 'readline-sync';
-import { randomInteger, lostGame, makeGreeting } from '../lib/games-lib.js';
-import { askQuestionCalc, setRandomOperation } from '../lib/calc-game-lib.js';
+import startGames from '../index.js';
+import { randomInteger } from '../lib/games.js';
 
-const startCalcGame = () => {
-  const name = makeGreeting();
+const rules = 'What is the result of the expression?';
 
-  console.log('What is the result of the expression?');
-
-  for (let count = 0; count < 3; count += 1) {
-    const operation = setRandomOperation(randomInteger(1, 3));
-    const firstNum = randomInteger(1, 9);
-    const secondNum = randomInteger(1, 9);
-
-    const questionResult = askQuestionCalc(firstNum, operation, secondNum);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (Number(answer) === questionResult) {
-      console.log('Correct!');
-    } else {
-      return lostGame(answer, questionResult, name);
-    }
+const calcOperations = (firstNum, operation, secondNum) => {
+  switch (operation) {
+    case '+': return firstNum + secondNum;
+    case '-': return firstNum - secondNum;
+    case '*': return firstNum * secondNum;
+    default:
+      return false;
   }
-  return console.log(`Congratulations, ${name}`);
 };
 
-export { startCalcGame };
+const createGame = () => {
+  const num1 = randomInteger(0, 10);
+  const num2 = randomInteger(0, 10);
+  const operators = ['+', '-', '*'];
+  const operator = operators[randomInteger(0, operators.length - 1)];
+  const question = `${num1} ${operator} ${num2}`;
+  const correctAnswer = calcOperations(num1, operator, num2);
+
+  return [question, correctAnswer];
+};
+
+const startCalcGame = () => startGames(createGame, rules);
+export default startCalcGame;

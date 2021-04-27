@@ -1,26 +1,15 @@
-import readlineSync from 'readline-sync';
-import {
-  randomInteger, lostGame, askQuestion, makeGreeting,
-} from '../lib/games-lib.js';
-import isPrime from '../lib/prime-game.lib.js';
+import startGames from '../index.js';
+import { randomInteger, isPrime } from '../lib/games.js';
 
-const startPrimeGame = () => {
-  const name = makeGreeting();
-  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-  for (let count = 0; count < 3; count += 1) {
-    const questionResult = askQuestion(randomInteger(1, 53));
-    const answer = readlineSync.question('Your answer: ');
+const createGame = () => {
+  const questionNum = randomInteger(1, 53);
+  const question = `${questionNum}`;
+  const correctAnswer = isPrime(question) ? 'yes' : 'no';
 
-    const correctAnswer = isPrime(questionResult) ? 'yes' : 'no';
-
-    if (answer === correctAnswer) {
-      console.log('Correct!');
-    } else {
-      return lostGame(answer, correctAnswer, name);
-    }
-  }
-  return console.log(`Congratulations, ${name}`);
+  return [question, correctAnswer];
 };
 
-export { startPrimeGame };
+const startPrimeGame = () => startGames(createGame, rules);
+export default startPrimeGame;

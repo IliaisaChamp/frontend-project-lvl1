@@ -1,25 +1,15 @@
-import readlineSync from 'readline-sync';
-import {
-  randomInteger, lostGame, askQuestion, makeGreeting,
-} from '../lib/games-lib.js';
+import startGames from '../index.js';
+import { randomInteger } from '../lib/games.js';
 
-const startEvenGame = () => {
-  const name = makeGreeting();
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-  for (let count = 0; count < 3; count += 1) {
-    const questionResult = askQuestion(randomInteger(1, 100));
-    const answer = readlineSync.question('Your answer: ');
+const createGame = () => {
+  const question = randomInteger(0, 100);
 
-    const correctAnswer = questionResult % 2 === 0 ? 'yes' : 'no';
+  const correctAnswer = question % 2 === 0 ? 'yes' : 'no';
 
-    if (answer === correctAnswer) {
-      console.log('Correct!');
-    } else {
-      return lostGame(answer, correctAnswer, name);
-    }
-  }
-  return console.log(`Congratulations, ${name}`);
+  return [question, correctAnswer];
 };
 
+const startEvenGame = () => startGames(createGame, rules);
 export default startEvenGame;

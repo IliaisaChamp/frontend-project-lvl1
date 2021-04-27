@@ -6,4 +6,4 @@ const makeGreeting = () => {
   console.log(`Hello, ${name}`);
 };
 
-export { makeGreeting };
+export default makeGreeting;

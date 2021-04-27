@@ -1,26 +1,20 @@
-import readlineSync from 'readline-sync';
-import { lostGame, makeGreeting } from '../lib/games-lib.js';
-import { makeProgressionArray, replaceNumInArray, askQuestion } from '../lib/progression-game-lib.js';
+import startGames from '../index.js';
+import { makeProgressionArray, randomInteger } from '../lib/games.js';
 
-const startProgressionGame = () => {
-  const name = makeGreeting();
+const rules = 'What number is missing in the progression?';
 
-  console.log('What number is missing in the progression?');
+const createGame = () => {
+  const progressionArr = makeProgressionArray();
+  const randomId = randomInteger(1, progressionArr.length - 1);
+  const replacedNum = progressionArr[randomId];
 
-  for (let count = 0; count < 3; count += 1) {
-    const progressionArr = makeProgressionArray();
-    const [newArr, replacedNum] = replaceNumInArray(progressionArr);
+  const questionArr = [...progressionArr];
+  questionArr.splice(randomId, 1, '...');
 
-    askQuestion(newArr);
-    const answer = readlineSync.question('Your answer: ');
+  const question = questionArr.join(' ');
 
-    if (Number(answer) === replacedNum) {
-      console.log('Correct!');
-    } else {
-      return lostGame(answer, replacedNum, name);
-    }
-  }
-  return console.log(`Congratulations, ${name}`);
+  return [question, replacedNum];
 };
 
-export { startProgressionGame };
+const startProgressionGame = () => startGames(createGame, rules);
+export default startProgressionGame;
