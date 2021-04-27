@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import { randomInteger, lostGame, askQuestion } from '../lib/lib.js';
+import { randomInteger, lostGame, askQuestionEven } from '../lib/lib.js';
 
 const makeGreeting = () => {
   const name = readlineSync.question('May I have your name? ');
@@ -12,7 +12,7 @@ const startEvenGame = () => {
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
   for (let count = 0; count < 3; count + 1) {
-    const questionResult = askQuestion(randomInteger(1, 100));
+    const questionResult = askQuestionEven(randomInteger(1, 100));
     const answer = readlineSync.question('Your answer: ');
 
     const correctAnswer = questionResult % 2 === 0 ? 'yes' : 'no';
